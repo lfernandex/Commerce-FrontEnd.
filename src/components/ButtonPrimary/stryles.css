@@ -1,0 +1,5 @@
+.btn-blue {
+    background-color: var(--c-color-btn-primary);
+    color: var(--c-color-btn-inverse);
+    border: none;
+  }

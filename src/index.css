@@ -143,18 +143,6 @@ a:hover {
   align-items: center;
 }
 
-.btn-blue {
-  background-color: var(--c-color-btn-primary);
-  color: var(--c-color-btn-inverse);
-  border: none;
-}
-
-.btn-white {
-  background-color: var(--c-color-btn-inverse);
-  color: var(--c-color-btn-primary);
-  border: 1px solid var(--c-color-btn-primary);
-}
-
 .btn-next-page {
   border: 1px solid var(--c-color-btn-primary);
   color: var(--c-color-btn-primary);

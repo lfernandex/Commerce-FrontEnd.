@@ -1,0 +1,18 @@
+.product-category{
+    background-color: var(--c-color-font-secondary);
+    color: var(--c-color-font-tertiary);
+  
+    font-size: 12px;
+    font-weight: 700;
+    
+    padding: 0px 20px;
+    margin-right: 20px;
+    margin-bottom: 10px;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    border-radius: 4px;
+    height: 30px;
+  }
