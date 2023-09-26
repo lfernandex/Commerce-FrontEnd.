@@ -1,22 +1,33 @@
 
+import { Link } from 'react-router-dom';
 import cartIcon from '../../assets/carrinho.svg';
 
-export default function HeaderClient(){
+export default function HeaderClient() {
 
-    return(
-        <>
-        <header className="nav-container">
+  return (
+    <>
+      <header className="nav-container">
         <nav className="nav-main">
-          <h1>Commerce</h1>
+          <Link to="/">
+            <h1>Commerce</h1>
+          </Link>
+
           <div className="commerce-menu-items-container">
 
             <div className="commerce-menu-items">
-              <img src={cartIcon} alt="Carrinho de compras"/>
+              <Link to="/cart">
+              <img src={cartIcon} alt="Carrinho de compras" />
+              </Link>
+              
             </div>
-            <a href="#">Entrar</a>
+
+            <Link to="/login">
+              Entrar
+            </Link>
+
           </div>
         </nav>
       </header>
-        </>
-    );
+    </>
+  );
 }

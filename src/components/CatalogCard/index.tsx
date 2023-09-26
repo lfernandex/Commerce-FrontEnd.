@@ -1,18 +1,24 @@
-import notebookImg from '../../assets/notebook.jpg';
+import { Link } from 'react-router-dom';
+import { ProductDTO } from '../../models/product';
 import './styles.css';
 
-export default function CatalogCard() {
+type Props = {
+    product: ProductDTO;
+}
+
+export default function CatalogCard({ product }: Props) {
 
     return (
-
-        <div className="commerce-card">
-            <div className="catalog-card-top line-bottom">
-                <img src={notebookImg} alt="Notebook" />
+        <Link to={`/product-details/${product.id}`}>
+            <div className="commerce-card">
+                <div className="catalog-card-top line-bottom">
+                    <img src={product.imgUrl} alt={product.name} />
+                </div>
+                <div className="catalog-card-bottom">
+                    <h3>R$ {product.price.toFixed(2)}</h3>
+                    <h4>{product.name}</h4>
+                </div>
             </div>
-            <div className="catalog-card-bottom">
-                <h3>R$: 5000,00</h3>
-                <h4>Computador Gamer XT</h4>
-            </div>
-        </div>
+        </Link>
     );
 }

@@ -1,10 +1,15 @@
 import './stryles.css';
-export default function ButtonPrimary() {
+
+type Props ={
+    text: string;
+}
+
+export default function ButtonPrimary({text}: Props) {
 
     return (
         <>
             <div className="btn btn-blue">
-                Comprar
+                {text}
             </div>
         </>
     );
