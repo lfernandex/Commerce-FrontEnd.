@@ -1,14 +1,27 @@
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import ButtonInverse from "../../../components/ButtonInverse";
 import ButtonPrimary from "../../../components/ButtonPrimary";
 import ProductCard from "../../../components/ProductCard";
+import { ProductDTO } from "../../../models/product";
 import { findById } from "../../../services/ProductService";
 
 export default function ProductDetails() {
 
   const params = useParams();
 
-  const product = findById(Number(params.productId));
+  const [product, setProduct] = useState<ProductDTO>();
+
+  useEffect(() => {
+
+    findById(Number(params.productId))
+      .then(response =>{
+        console.log(response.data)
+        setProduct(response.data);
+      });
+
+  }, []);
+
 
   return (
     <>

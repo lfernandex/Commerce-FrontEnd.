@@ -1,11 +1,24 @@
+import { useEffect, useState } from 'react';
 import ButtonNextPage from '../../../components/ButtonNextPage';
 import CatalogCard from '../../../components/CatalogCard';
 import SearchBar from '../../../components/SearchBar';
-import * as productService from '../../../services/ProductService';
+import { ProductDTO } from '../../../models/product';
+import { findAll } from '../../../services/ProductService';
 import './styles.css';
 
 
 export default function ProductCatalog() {
+
+  const [products, setProducts] = useState<ProductDTO[]>([]);
+
+  useEffect(() => {
+
+   findAll()
+    .then(response =>{
+      setProducts(response.data.content);
+    })
+
+  }, [])
 
   return (
 
@@ -18,7 +31,7 @@ export default function ProductCatalog() {
           <div className="catalog-cards mb20 mt20">
 
             {
-              productService.findAll().map(
+              products.map(
                 product => <CatalogCard key={product.id} product={product} />)
             }
 
