@@ -4,6 +4,7 @@ import ButtonInverse from "../../../components/ButtonInverse";
 import ButtonPrimary from "../../../components/ButtonPrimary";
 import ProductCard from "../../../components/ProductCard";
 import { ProductDTO } from "../../../models/product";
+import { addProduct } from "../../../services/CartService";
 import { findById } from "../../../services/ProductService";
 
 export default function ProductDetails() {
@@ -17,16 +18,24 @@ export default function ProductDetails() {
   useEffect(() => {
 
     findById(Number(params.productId))
-      .then(response =>{
+      .then(response => {
         console.log(response.data)
         setProduct(response.data);
       })
-      .catch(() =>{
+      .catch(() => {
         naviGate("/")
       });
 
   }, []);
 
+
+  function handleByClick() {
+    if (product) {
+      addProduct(product);
+      naviGate("/product-cart")
+    }
+
+  }
 
   return (
     <>
@@ -39,7 +48,10 @@ export default function ProductDetails() {
 
           <div className="btn-page-container">
 
-            <ButtonPrimary text="Comprar" />
+            <div onClick={handleByClick}>
+              <ButtonPrimary text="Comprar" />
+            </div>
+
 
             <Link to="/">
               <ButtonInverse text="Inicio" />
