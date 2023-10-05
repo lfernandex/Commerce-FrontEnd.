@@ -1,26 +1,19 @@
+import { useState } from "react";
+import { OrderDTO, OrderItemDTO } from "../../../models/order";
+import { getCart } from "../../../services/CartService";
 import "./styles.css";
 
+const item1: OrderItemDTO = new OrderItemDTO(
+    4, 1, "PC Gamer", 1200, "https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/4-big.jpg"
+)
 
-const cart = {
-    items: [
-        {
-            productId: 4,
-            quantity: 1,
-            name: "PC Gamer",
-            price: 1200,
-            imgUrl: "https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/4-big.jpg"
-        },
-        {
-            productId: 5,
-            quantity: 2,
-            name: "Rails for Dummies",
-            price: 100.99,
-            imgUrl: "https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/5-big.jpg"
-        }
-    ]
-}
+const item2: OrderItemDTO = new OrderItemDTO(
+    5, 2, "Rails for Dumies", 100.99, "https://raw.githubusercontent.com/devsuperior/dscatalog-resources/master/backend/img/5-big.jpg"
+)
 
 export default function ProductCart() {
+
+    const [cart, setCart] = useState<OrderDTO>(getCart);
 
     return (
 
@@ -29,8 +22,9 @@ export default function ProductCart() {
                 <div className="commerce-card mb20">
 
                     {
+                        cart &&
                         cart.items.map(item => (
-                            <div key ={item.productId} className="dsc-cart-item-container line-bottom">
+                            <div key={item.productId} className="dsc-cart-item-container line-bottom">
                                 <div className="dsc-cart-item-left">
                                     <img className="product-image" src={item.imgUrl} alt={item.name} />
                                     <div className="dsc-cart-item-description">
