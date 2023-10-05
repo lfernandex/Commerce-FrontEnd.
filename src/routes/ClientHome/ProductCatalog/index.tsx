@@ -11,6 +11,7 @@ export default function ProductCatalog() {
 
   const [products, setProducts] = useState<ProductDTO[]>([]);
 
+
   useEffect(() => {
 
    findAll()
@@ -18,7 +19,7 @@ export default function ProductCatalog() {
       setProducts(response.data.content);
     })
 
-  }, [])
+  }, []) 
 
   return (
 
