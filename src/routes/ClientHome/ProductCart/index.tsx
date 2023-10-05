@@ -1,17 +1,27 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { OrderDTO } from "../../../models/order";
-import { clearCart, getCart } from "../../../services/CartService";
+import { clearCart, decreaseItem, getCart, increaseItem } from "../../../services/CartService";
 import "./styles.css";
 
 
 export default function ProductCart() {
 
-    const [cart, setCart] = useState<OrderDTO>(getCart);
+    const [cart, setCart] = useState<OrderDTO>(getCart());
 
     function handleClearClick(){
         clearCart();
-        setCart(getCart);
+        setCart(getCart());
+    }
+
+    function handleIncreaseItem(productId: number){
+        increaseItem(productId);
+        setCart(getCart());
+    }
+
+    function handleDecreaseItem(productId: number){
+        decreaseItem(productId);   
+        setCart(getCart());
     }
 
     return (
@@ -36,9 +46,9 @@ export default function ProductCart() {
                                             <div className="dsc-cart-item-description">
                                                 <h3>{item.name}</h3>
                                                 <div className="dsc-cart-item-quantity-container">
-                                                    <div className="dsc-cart-item-quantity-btn">-</div>
+                                                    <div onClick={() => handleDecreaseItem(item.productId)} className="dsc-cart-item-quantity-btn">-</div>
                                                     <p>{item.quantity}</p>
-                                                    <div className="dsc-cart-item-quantity-btn">+</div>
+                                                    <div onClick={() => handleIncreaseItem(item.productId)} className="dsc-cart-item-quantity-btn">+</div>
                                                 </div>
                                             </div>
                                         </div>
