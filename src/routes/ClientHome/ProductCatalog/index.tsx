@@ -3,7 +3,7 @@ import ButtonNextPage from '../../../components/ButtonNextPage';
 import CatalogCard from '../../../components/CatalogCard';
 import SearchBar from '../../../components/SearchBar';
 import { ProductDTO } from '../../../models/product';
-import { findAll } from '../../../services/ProductService';
+import { findPageRequest } from '../../../services/ProductService';
 import './styles.css';
 
 
@@ -11,15 +11,20 @@ export default function ProductCatalog() {
 
   const [products, setProducts] = useState<ProductDTO[]>([]);
 
+  const [productName, setProductName] = useState("");
 
   useEffect(() => {
 
-   findAll()
+   findPageRequest(0, productName)
     .then(response =>{
       setProducts(response.data.content);
     })
 
-  }, []) 
+  }, [productName]);
+
+  function handleSearch(searchText: string){
+    setProductName(searchText);
+  }
 
   return (
 
@@ -27,7 +32,7 @@ export default function ProductCatalog() {
       <main>
         <section id="catalog-section" className="product-container">
 
-          <SearchBar />
+          <SearchBar onSearch={handleSearch}/>
 
           <div className="catalog-cards mb20 mt20">
 
