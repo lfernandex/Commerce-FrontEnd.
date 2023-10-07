@@ -30,7 +30,7 @@ export default function ProductCatalog() {
       .then(response => {
         const nextPage = response.data.content;
         setProducts(products.concat(nextPage));
-        setIsLastPage(response.data.last)
+        setIsLastPage(response.data.last);
       })
 
   }, [queryParams]);

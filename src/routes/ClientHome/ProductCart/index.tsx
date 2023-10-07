@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { OrderDTO } from "../../../models/order";
 import { clearCart, decreaseItem, getCart, increaseItem } from "../../../services/CartService";
+import { ContextCartCount } from "../../../utils/contextCart";
 import "./styles.css";
 
 
@@ -9,19 +10,29 @@ export default function ProductCart() {
 
     const [cart, setCart] = useState<OrderDTO>(getCart());
 
+    const {setContextCartCount} = useContext(ContextCartCount);
+
     function handleClearClick(){
         clearCart();
-        setCart(getCart());
+        updateCart();
     }
 
     function handleIncreaseItem(productId: number){
         increaseItem(productId);
-        setCart(getCart());
+        const newCart = getCart();
+        setCart(newCart);
+
     }
 
     function handleDecreaseItem(productId: number){
         decreaseItem(productId);   
-        setCart(getCart());
+        updateCart();
+    }
+
+    function updateCart(){
+        const newCart = getCart();
+        setCart(newCart);
+        setContextCartCount(newCart.items.length);
     }
 
     return (
@@ -66,7 +77,7 @@ export default function ProductCart() {
 
                 }
                 <div className="btn-page-container">
-                    <div className="btn btn-blue">
+                    <div className="btn btn-blue click">
                         Finalizar pedido
                     </div>
                     <Link to="/product-catalog">
@@ -74,7 +85,7 @@ export default function ProductCart() {
                             Continuar comprando
                         </div>
                     </Link>
-                    <div onClick={handleClearClick} className="btn btn-white">
+                    <div onClick={handleClearClick} className="btn btn-white click">
                         Limpar Carrinho
                     </div>
                 </div>
