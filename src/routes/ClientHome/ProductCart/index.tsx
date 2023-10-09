@@ -21,7 +21,6 @@ export default function ProductCart() {
         increaseItem(productId);
         const newCart = getCart();
         setCart(newCart);
-
     }
 
     function handleDecreaseItem(productId: number){
