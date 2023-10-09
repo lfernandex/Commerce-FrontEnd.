@@ -1,4 +1,3 @@
-import './stryles.css';
 
 type Props ={
     text: string;
@@ -8,7 +7,7 @@ export default function ButtonPrimary({text}: Props) {
 
     return (
         <>
-            <div className="btn btn-blue click">
+            <div className="fb-btn fb-btn-blue fb-click">
                 {text}
             </div>
         </>

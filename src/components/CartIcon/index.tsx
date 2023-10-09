@@ -12,9 +12,9 @@ export function CartIcon() {
             <img src={cartIcon} alt="Carrinho de compras" />
             {
                 contextCartCount > 0 &&
-                <div className="cart-count">{contextCartCount}</div> 
+                <div className="fb-cart-count">{contextCartCount}</div> 
             }
         </>
 
     );
-}
+} 

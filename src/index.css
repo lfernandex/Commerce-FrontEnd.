@@ -36,63 +36,33 @@ body {
 
 /*------------------------------------------------*/
 /* header styles */
-.nav-container {
-  height: 80px;
-  background-color: var(--c-color-bg-secondary);
-  width: 100%;
-  padding: 0 20px;
+
+
+.fb-navbar-rigth {
   display: flex;
   align-items: center;
 }
 
-.nav-main {
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.nav-main h1 {
-  color: var(--c-color-bg-primary);
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.nav-main a,
-a:hover {
-  font-size: 15px;
-  font-weight: 700;
-  text-decoration: none;
-  color: var(--c-color-bg-primary);
-}
-
-.commerce-navbar-rigth {
-  display: flex;
-  align-items: center;
-}
-
-.commerce-menu-items-container {
+.fb-menu-items-container {
   display: flex;
 }
 
-.commerce-menu-items-container img {
+.fb-menu-items-container img {
   width: 20px;
   height: 20px;
   
 }
 
-.commerce-menu-items {
+.fb-menu-items {
   display: flex;
   margin-right: 20px;
 }
 
-.commerce-menu-items p {
+.fb-menu-items p {
   display: none;
 }
 
-.commerce-menu-items-active {
+.fb-menu-items-active {
   font-weight: 700;
 }
 
@@ -101,7 +71,7 @@ a:hover {
     font-size: 24px;
   }
 
-  .commerce-menu-items p {
+  .fb-menu-items p {
     display: unset;
     margin-left: 5px;
     color: var(--c-color-bg-primary);
@@ -110,7 +80,7 @@ a:hover {
 
 /*------------------------------------------------*/
 /* card styles */
-.commerce-card {
+.fb-card {
   background-color: var(--c-color-card-bg);
   width: 100%;
   max-width: 900px;
@@ -119,13 +89,14 @@ a:hover {
   border: 1px solid var(--c-color-card-border);
 }
 
-.line-bottom {
+.fb-line-bottom {
   border-bottom: 1px solid var(--c-color-bg-primary);
 }
 
 /*------------------------------------------------*/
 /* buttom styles */
-.btn-page-container {
+
+.fb-btn-page-container {
   width: 100%;
 
   display: grid;
@@ -133,7 +104,7 @@ a:hover {
   margin: auto;
 }
 
-.btn {
+.fb-btn {
   width: 100%;
   height: 42px;
 
@@ -147,10 +118,18 @@ a:hover {
   align-items: center;
 }
 
+.fb-btn-blue {
+  background-color: var(--c-color-btn-primary);
+  color: var(--c-color-btn-inverse);
+  border: none;
+}
 
+.fb-click{
+  cursor: pointer;
+}
 
 @media (min-width: 576px) {
-  .btn-page-container {
+  .fb-btn-page-container {
     width: 250px;
   }
 }
@@ -158,7 +137,7 @@ a:hover {
 /*------------------------------------------------*/
 /* generic styles */
 
-.product-container {
+.fb-container {
   width: 100%;
   padding: 20px;
   max-width: 1000px;
@@ -169,41 +148,37 @@ a:hover {
   text-decoration: none;
 }
 
-.mb20 {
+.fb-mb20 {
   margin-bottom: 20px;
 }
 
-.mt20 {
+.fb-mt20 {
   margin-top: 20px;
 }
 
-.commerce-section-title {
+.fb-section-title {
   font-size: 16px;
   text-align: center;
   color: var(--c-color-font-secondary);
 }
 
 @media (min-width:576px){
-  .commerce-section-title {
+  .fb-section-title {
     font-size: 24px;
   }
 }
 
-/*------------------------------------------------*/
-/* seacrch bar styles */
-
-
 
 /*------------------------------------------------*/
 /* form styles */
-.commerce-form {
+.fb-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 40px 20px;
 }
 
-.commerce-form h2 {
+.fb-form h2 {
   font-size: 16px;
   color: var(--c-color-font-secondary);
   text-transform: uppercase;
@@ -211,14 +186,14 @@ a:hover {
   text-align: center;
 }
 
-.commerce-form-controls-container {
+.fb-form-controls-container {
   width: 100%;
   display: grid;
   grid-gap: 20px;
   margin: 20px 0;
 }
 
-.commerce-form-control {
+.fb-form-control {
   width: 100%;
   height: 40px;
   font-size: 16px;
@@ -228,43 +203,43 @@ a:hover {
   border-radius: 8px;
 }
 
-.commerce-form-control:focus {
+.fb-form-control:focus {
   outline: none;
 }
 
-.commerce-form-control::placeholder {
+.fb-form-control::placeholder {
   color: var(--c-color-font-placeholder);
 }
 
-.commerce-input-error {
+.fb-input-error {
   border: 1px solid var(--c-color-error);
 }
-.commerce-form-error {
+.fb-form-error {
   color: var(--c-color-error);
   font-size: 12px;
   padding-left: 4px;
 }
 
-.commerce-select:invalid {
+.fb-select:invalid {
   color: var(--c-color-font-placeholder);
 }
 
-.commerce-select option[disabled] {
+.fb-select option[disabled] {
   display: none;
 }
 
-.commerce-select option {
+.fb-select option {
   color: var(--c-color-font-secondary);
 }
 
-.commerce-textarea {
+.fb-textarea {
   height: 128px;
   padding-top: 10px;
   resize: none;
 }
 
 @media (min-width: 576px) {
-  .commerce-form h2 {
+  .fb-form h2 {
     font-size: 24px;
   }
 }
@@ -272,7 +247,7 @@ a:hover {
 /*------------------------------------------------*/
 /* table styles */
 
-.commerce-table {
+.fb-table {
   width: 100%;
   background-color: var(--c-color-card-bg);
   border-spacing: 0;
@@ -280,72 +255,72 @@ a:hover {
   border-radius: 8px;
 }
 
-.commerce-table thead {
+.fb-table thead {
   color: var(--c-color-font-secondary);
 
   height: 55px;
   font-size: 14px;
 }
 
-.commerce-table thead th {
+.fb-table thead th {
   text-align: center;
 }
 
-.commerce-table tbody {
+.fb-table tbody {
   font-size: 12px;
   color: var(--c-color-font-secondary);
 }
 
-.commerce-table tbody tr td {
+.fb-table tbody tr td {
   text-align: center;
 }
 
-.commerce-table tbody tr {
+.fb-table tbody tr {
   height: 70px;
   border: 1px solid var(--c-color-card-border);
 }
 
-.commerce-table td:nth-child(2) {
+.fb-table td:nth-child(2) {
   padding-left: 10px;
 }
 
-.commerce-table td:last-child {
+.fb-table td:last-child {
   padding-right: 10px;
 }
-.commerce-tb576 {
+.fb-tb576 {
   display: none;
 }
 
 @media (min-width: 576px) {
-  .commerce-tb576 {
+  .fb-tb576 {
     display: table-cell;
   }
 
-  .commerce-table td:nth-child(1) {
+  .fb-table td:nth-child(1) {
     padding-left: 20px;
   }
 
-  .commerce-table th:nth-child(1) {
+  .fb-table th:nth-child(1) {
     padding-left: 20px;
   }
 
-  .commerce-table td:nth-child(2) {
+  .fb-table td:nth-child(2) {
     padding-left: 0;
   }
 }
 
-.commerce-tb768 {
+.fb-tb768 {
   display: none;
 }
 
 @media (min-width: 768px) {
-  .commerce-tb768 {
+  .fb-tb768 {
     display: table-cell;
   }
 }
 
 @media (min-width: 992px) {
-  .commerce-table tbody {
+  .fb-table tbody {
     font-size: 16px;
   }
 }

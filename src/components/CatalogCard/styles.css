@@ -1,24 +1,24 @@
-.catalog-card-top{
+.fb-catalog-card-top{
     display: flex;
     justify-content: center;
     padding: 10px;
 }
 
-.catalog-card-top img{
+.fb-catalog-card-top img{
     width: 150px;
 }
 
-.catalog-card-bottom{
+.fb-catalog-card-bottom{
     padding: 10px 20px;
     min-height: 110px;
 }
 
-.catalog-card-bottom h3{
+.fb-catalog-card-bottom h3{
     color: var(--c-color-font-primary);
     font-size: 20px;
 }
 
-.catalog-card-bottom h4{
+.fb-catalog-card-bottom h4{
     color: var(--c-color-font-secondary);
     font-size: 12px;
 }

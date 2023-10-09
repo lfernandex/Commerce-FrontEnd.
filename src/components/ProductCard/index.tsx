@@ -10,17 +10,17 @@ export default function ProductCard({ product }: Props) {
 
   return (
     <>
-      <div className="commerce-card mb20">
-        <div className="product-image line-bottom">
+      <div className="fb-card fb-mb20">
+        <div className="fb-product-image fb-line-bottom">
           <img src={product.imgUrl} alt={product.name} />
         </div>
 
-        <div className="product-description">
+        <div className="fb-product-description">
           <h3>R$ {product.price.toFixed(2)}</h3>
           <h4>{product.name}</h4>
           <p>{product.description}</p>
 
-          <div className="product-category-container">
+          <div className="fb-product-category-container">
 
             {
               product.categories.map(item => (

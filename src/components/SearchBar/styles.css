@@ -1,4 +1,4 @@
-.seacrch-bar {
+.fb-seacrch-bar {
     height: 40px;
     display: flex;
   
@@ -6,37 +6,37 @@
     border: 1px solid var(--c-color-bg-primary);
   }
   
-  .seacrch-bar input,
+  .fb-seacrch-bar input,
   button {
     border: 1 solid var(--c-color-card-border);
   }
   
-  .seacrch-bar input {
+  .fb-seacrch-bar input {
     width: 100%;
     font-size: 16px;
     padding: 0 10px;
     color: var(--c-color-font-secondary);
   }
   
-  .seacrch-bar input:focus {
+  .fb-seacrch-bar input:focus {
     outline: none;
   }
   
-  .seacrch-bar input::placeholder {
+  .fb-seacrch-bar input::placeholder {
     color: var(--c-color-font-placeholder);
   }
   
-  .seacrch-bar button {
+  .fb-seacrch-bar button {
     width: 40px;
     color: var(--c-color-font-secondary);
   }
   
-  .seacrch-bar button[type="submit"] {
+  .fb-seacrch-bar button[type="submit"] {
     border-radius: none;
     border-radius: 8px 0 0 8px;
   }
   
-  .seacrch-bar button[type="reset"] {
+  .fb-seacrch-bar button[type="reset"] {
     border-radius: none;
     border-radius: 0 8px 8px 0;
   }

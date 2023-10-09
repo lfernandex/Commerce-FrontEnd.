@@ -9,7 +9,7 @@ export default function ButtonInverse({ text }: Props) {
     return (
 
         <>
-            <div className="btn btn-white">
+            <div className="fb-btn fb-btn-white">
                 {text}
             </div>
         </>

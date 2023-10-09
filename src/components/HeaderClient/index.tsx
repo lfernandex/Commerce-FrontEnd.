@@ -1,21 +1,22 @@
 
 import { Link } from 'react-router-dom';
 import { CartIcon } from '../CartIcon';
+import "./styles.css";
 
 export default function HeaderClient() {
 
   return (
     <>
-      <header className="nav-container">
-        <nav className="nav-main">
+      <header className="fb-nav-container">
+        <nav className="fb-nav-main">
           <Link to="/">
             <h1>Commerce</h1>
           </Link>
 
-          <div className="commerce-menu-items-container">
+          <div className="fb-menu-items-container">
 
             <Link to="/cart">
-              <div className="commerce-menu-items">
+              <div className="fb-menu-items">
                 <CartIcon />
               </div>
             </Link>

@@ -9,7 +9,7 @@ export default function ProductCategory({ name }: Props) {
 
     return (
         <>
-            <div className="product-category">
+            <div className="fb-product-category">
                 {name}
             </div>
         </>

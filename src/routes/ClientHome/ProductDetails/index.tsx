@@ -46,13 +46,13 @@ export default function ProductDetails() {
   return (
     <>
       <main>
-        <section id="product-section" className="product-container">
+        <section id="product-section" className="fb-container">
           {
             product &&
             <ProductCard product={product} />
           }
 
-          <div className="btn-page-container">
+          <div className="fb-btn-page-container">
 
             <div onClick={handleByClick}>
               <ButtonPrimary text="Comprar" />

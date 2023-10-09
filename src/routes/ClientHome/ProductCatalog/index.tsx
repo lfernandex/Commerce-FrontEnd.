@@ -48,11 +48,11 @@ export default function ProductCatalog() {
 
     <>
       <main>
-        <section id="catalog-section" className="product-container">
+        <section id="catalog-section" className="fb-container">
 
           <SearchBar onSearch={handleSearch} />
 
-          <div className="catalog-cards mb20 mt20">
+          <div className="fb-catalog-cards fb-mb20 fb-mt20">
 
             {
               products.map(

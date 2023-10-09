@@ -38,54 +38,54 @@ export default function ProductCart() {
     return (
 
         <main>
-            <section id="cart-container-section" className="product-container">
+            <section id="cart-container-section" className="fb-container">
                 {
                     cart.items.length === 0
                         ? (
                             <div>
-                                <h2 className="commerce-section-title mb20">Seu carrinho está vazio</h2>
+                                <h2 className="fb-section-title mb20">Seu carrinho está vazio</h2>
                             </div>
                         ) :
 
-                        <div className="commerce-card mb20">
+                        <div className="fb-card mb20">
 
                             {
                                 cart.items.map(item => (
-                                    <div key={item.productId} className="dsc-cart-item-container line-bottom">
-                                        <div className="dsc-cart-item-left">
+                                    <div key={item.productId} className="fb-cart-item-container fb-line-bottom">
+                                        <div className="fb-cart-item-left">
                                             <img className="product-image" src={item.imgUrl} alt={item.name} />
-                                            <div className="dsc-cart-item-description">
+                                            <div className="fb-cart-item-description">
                                                 <h3>{item.name}</h3>
-                                                <div className="dsc-cart-item-quantity-container">
-                                                    <div onClick={() => handleDecreaseItem(item.productId)} className="dsc-cart-item-quantity-btn">-</div>
+                                                <div className="fb-cart-item-quantity-container">
+                                                    <div onClick={() => handleDecreaseItem(item.productId)} className="fb-cart-item-quantity-btn">-</div>
                                                     <p>{item.quantity}</p>
-                                                    <div onClick={() => handleIncreaseItem(item.productId)} className="dsc-cart-item-quantity-btn">+</div>
+                                                    <div onClick={() => handleIncreaseItem(item.productId)} className="fb-cart-item-quantity-btn">+</div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="dsc-cart-item-right">
+                                        <div className="fb-cart-item-right">
                                             <h3> R$: {(item.subTotal).toFixed(2)}</h3>
                                         </div>
                                     </div>
                                 ))
                             }
 
-                            <div className="dsc-cart-total-container">
+                            <div className="fb-cart-total-container">
                                 <h3>R$ {cart.total.toFixed(2)}</h3>
                             </div>
                         </div>
 
                 }
-                <div className="btn-page-container">
-                    <div className="btn btn-blue click">
+                <div className="fb-btn-page-container">
+                    <div className="fb-btn fb-btn-blue fb-click">
                         Finalizar pedido
                     </div>
                     <Link to="/product-catalog">
-                        <div className="btn btn-white">
+                        <div className="fb-btn fb-btn-white">
                             Continuar comprando
                         </div>
                     </Link>
-                    <div onClick={handleClearClick} className="btn btn-white click">
+                    <div onClick={handleClearClick} className="fb-btn fb-btn-white fb-click">
                         Limpar Carrinho
                     </div>
                 </div>

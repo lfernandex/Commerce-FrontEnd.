@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import ClientHome from './routes/ClientHome';
+import Login from './routes/ClientHome/Login';
 import ProductCart from './routes/ClientHome/ProductCart';
 import ProductCatalog from './routes/ClientHome/ProductCatalog';
 import ProductDetails from './routes/ClientHome/ProductDetails';
@@ -22,6 +23,7 @@ export default function App() {
               <Route path="product-catalog" element={<ProductCatalog />} />
               <Route path="product-details/:productId" element={<ProductDetails />} />
               <Route path="product-cart" element={<ProductCart />} />
+              <Route path="login" element={<Login />} />
             </Route>
 
             <Route path="*" element={<Navigate to="/" />} />

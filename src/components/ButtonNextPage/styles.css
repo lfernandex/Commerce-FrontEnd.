@@ -1,4 +1,4 @@
-.btn-next-page {
+.fb-btn-next-page {
     border: 1px solid var(--c-color-btn-primary);
     color: var(--c-color-btn-primary);
   
@@ -15,7 +15,7 @@
 
   @media (min-width: 576px) {
   
-    .btn-next-page {
+    .fb-btn-next-page {
       width: 250px;
       display: grid;
       grid-gap: 20px;
