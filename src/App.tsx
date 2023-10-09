@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import Admin from './routes/Admin';
-import AdminHome from './routes/Admin/AdminHome';
 import ClientHome from './routes/ClientHome';
 import Login from './routes/ClientHome/Login';
 import ProductCart from './routes/ClientHome/ProductCart';
@@ -26,11 +24,6 @@ export default function App() {
               <Route path="product-details/:productId" element={<ProductDetails />} />
               <Route path="product-cart" element={<ProductCart />} />
               <Route path="login" element={<Login />} />
-            </Route>
-            
-            <Route path="/admin/" element={<Admin/>}>
-              <Route index element={<AdminHome/>}/>
-              
             </Route>
 
             <Route path="*" element={<Navigate to="/" />} />
