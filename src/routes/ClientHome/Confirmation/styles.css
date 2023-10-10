@@ -1,0 +1,12 @@
+.fb-confirmation-message{
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--c-color-font-secondary);
+    text-align: center;
+}
+
+@media (min-width: 576px){
+    .fb-confirmation-message{
+        font-size: 24px;
+    }
+}

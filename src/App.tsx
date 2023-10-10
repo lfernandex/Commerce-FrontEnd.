@@ -10,6 +10,7 @@ import { history } from './utils/history';
 import Admin from './routes/Admin';
 import AdminHome from './routes/Admin/AdminHome';
 import ClientHome from './routes/ClientHome';
+import Confirmation from './routes/ClientHome/Confirmation';
 import Login from './routes/ClientHome/Login';
 import ProductCart from './routes/ClientHome/ProductCart';
 import ProductCatalog from './routes/ClientHome/ProductCatalog';
@@ -44,6 +45,7 @@ export default function App() {
               <Route path="product-details/:productId" element={<ProductDetails />} />
               <Route path="product-cart" element={<ProductCart />} />
               <Route path="login" element={<Login />} />
+              <Route path="confirmation/:orderId" element={<Confirmation />} />
             </Route>
 
             <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN']}><Admin /></PrivateRoute>}>
