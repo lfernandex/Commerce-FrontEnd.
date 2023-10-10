@@ -1,9 +1,36 @@
+import { useEffect, useState } from "react";
 import editIcon from "../../../assets/Pen.svg";
 import deleteIcon from "../../../assets/Trash.svg";
-import notebookIcon from "../../../assets/notebook.jpg";
+import { ProductDTO } from "../../../models/product";
+import { findPageRequest } from "../../../services/ProductService";
 import "./styles.css";
 
+type QueryParams = {
+    page: number;
+    name: string;
+}
+
+
 export default function ProductListing() {
+
+    const [isLastPage, setIsLastPage] = useState(false);
+
+    const [products, setProducts] = useState<ProductDTO[]>([]);
+
+    const [queryParams, setQueryParams] = useState<QueryParams>({
+        page: 0,
+        name: ""
+    });
+
+    useEffect(() => {
+        findPageRequest(queryParams.page, queryParams.name)
+            .then(response => {
+                const nextPage = response.data.content;
+                setProducts(products.concat(nextPage));
+                setIsLastPage(response.data.last);
+            })
+
+    }, [queryParams]);
 
     return (
         <>
@@ -34,79 +61,18 @@ export default function ProductListing() {
                             <th></th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td className="fb-tb576">341</td>
-                                <td><img className="fb-product-image" src={notebookIcon} alt="" /></td>
-                                <td className="fb-tb768">R$: 5.000,00</td>
-                                <td>Computador Gamer XT Plus Ultra</td>
-                                <td><img className="fb-product-listing-btn" src={editIcon} alt="" /></td>
-                                <td><img className="fb-product-listing-btn" src={deleteIcon} alt="" /></td>
-                            </tr>
-                            <tr>
-                                <td className="fb-tb576">341</td>
-                                <td><img className="fb-product-image" src={notebookIcon} alt="" /></td>
-                                <td className="fb-tb768">R$: 5.000,00</td>
-                                <td>Computador Gamer XT Plus Ultra</td>
-                                <td><img className="fb-product-listing-btn" src={editIcon} alt="" /></td>
-                                <td><img className="fb-product-listing-btn" src={deleteIcon} alt="" /></td>
-                            </tr>
-                            <tr>
-                                <td className="fb-tb576">341</td>
-                                <td><img className="fb-product-image" src={notebookIcon} alt="" /></td>
-                                <td className="fb-tb768">R$: 5.000,00</td>
-                                <td>Computador Gamer XT Plus Ultra</td>
-                                <td><img className="fb-product-listing-btn" src={editIcon} alt="" /></td>
-                                <td><img className="fb-product-listing-btn" src={deleteIcon} alt="" /></td>
-                            </tr>
-                            <tr>
-                                <td className="fb-tb576">341</td>
-                                <td><img className="fb-product-image" src={notebookIcon} alt="" /></td>
-                                <td className="fb-tb768">R$: 5.000,00</td>
-                                <td>Computador Gamer XT Plus Ultra</td>
-                                <td><img className="fb-product-listing-btn" src={editIcon} alt="" /></td>
-                                <td><img className="fb-product-listing-btn" src={deleteIcon} alt="" /></td>
-                            </tr>
-                            <tr>
-                                <td className="fb-tb576">341</td>
-                                <td><img className="fb-product-image" src={notebookIcon} alt="" /></td>
-                                <td className="fb-tb768">R$: 5.000,00</td>
-                                <td>Computador Gamer XT Plus Ultra</td>
-                                <td><img className="fb-product-listing-btn" src={editIcon} alt="" /></td>
-                                <td><img className="fb-product-listing-btn" src={deleteIcon} alt="" /></td>
-                            </tr>
-                            <tr>
-                                <td className="fb-tb576">341</td>
-                                <td><img className="fb-product-image" src={notebookIcon} alt="" /></td>
-                                <td className="fb-tb768">R$: 5.000,00</td>
-                                <td>Computador Gamer XT Plus Ultra</td>
-                                <td><img className="fb-product-listing-btn" src={editIcon} alt="" /></td>
-                                <td><img className="fb-product-listing-btn" src={deleteIcon} alt="" /></td>
-                            </tr>
-                            <tr>
-                                <td className="fb-tb576">341</td>
-                                <td><img className="fb-product-image" src={notebookIcon} alt="" /></td>
-                                <td className="fb-tb768">R$: 5.000,00</td>
-                                <td>Computador Gamer XT Plus Ultra</td>
-                                <td><img className="fb-product-listing-btn" src={editIcon} alt="" /></td>
-                                <td><img className="fb-product-listing-btn" src={deleteIcon} alt="" /></td>
-                            </tr>
-                            <tr>
-                                <td className="fb-tb576">341</td>
-                                <td><img className="fb-product-image" src={notebookIcon} alt="" /></td>
-                                <td className="fb-tb768">R$: 5.000,00</td>
-                                <td>Computador Gamer XT Plus Ultra</td>
-                                <td><img className="fb-product-listing-btn" src={editIcon} alt="" /></td>
-                                <td><img className="fb-product-listing-btn" src={deleteIcon} alt="" /></td>
-                            </tr>
-                            <tr>
-                                <td className="fb-tb576">341</td>
-                                <td><img className="fb-product-image" src={notebookIcon} alt="" /></td>
-                                <td className="fb-tb768">R$: 5.000,00</td>
-                                <td>Computador Gamer XT Plus Ultra</td>
-                                <td><img className="fb-product-listing-btn" src={editIcon} alt="" /></td>
-                                <td><img className="fb-product-listing-btn" src={deleteIcon} alt="" /></td>
-                            </tr>
-
+                            {
+                                products.map(product => (
+                                    <tr>
+                                        <td className="fb-tb576">{product.id}</td>
+                                        <td><img className="fb-product-image" src={product.imgUrl} alt={product.name} /></td>
+                                        <td className="fb-tb768">R$: {product.price}</td>
+                                        <td>{product.name}</td>
+                                        <td><img className="fb-product-listing-btn" src={editIcon} alt="" /></td>
+                                        <td><img className="fb-product-listing-btn" src={deleteIcon} alt="" /></td>
+                                    </tr>
+                                ))
+                            }
                         </tbody>
                     </table>
 
