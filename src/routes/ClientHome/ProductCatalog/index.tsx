@@ -15,8 +15,6 @@ export default function ProductCatalog() {
 
   const [isLastPage, setIsLastPage] = useState(false);
 
-
-
   const [products, setProducts] = useState<ProductDTO[]>([]);
 
   const [queryParams, setQueryParams] = useState<QueryParams>({
@@ -25,7 +23,6 @@ export default function ProductCatalog() {
   });
 
   useEffect(() => {
-
     findPageRequest(queryParams.page, queryParams.name)
       .then(response => {
         const nextPage = response.data.content;
