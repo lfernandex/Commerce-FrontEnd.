@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import editIcon from "../../../assets/Pen.svg";
 import deleteIcon from "../../../assets/Trash.svg";
+import ButtonNextPage from "../../../components/ButtonNextPage";
+import SearchBar from "../../../components/SearchBar";
 import { ProductDTO } from "../../../models/product";
 import { findPageRequest } from "../../../services/ProductService";
 import "./styles.css";
@@ -32,6 +34,15 @@ export default function ProductListing() {
 
     }, [queryParams]);
 
+    function handleSearch(searchText: string) {
+        setProducts([]);
+        setQueryParams({ ...queryParams, page: 0, name: searchText });
+    }
+
+    function handleNextPageClick() {
+        setQueryParams({ ...queryParams, page: queryParams.page + 1 });
+    }
+
     return (
         <>
             <main>
@@ -39,33 +50,31 @@ export default function ProductListing() {
 
                     <h2 className="fb-section-title">Cadastro de produtos</h2>
 
-                    <div className="fb-btn-page-container fb-mt20">
+                    <div className="fb-btn-page-container fb-mt20 fb-mb20">
                         <div className="fb-btn-next-page">
                             Novo
                         </div>
                     </div>
 
-                    <form className="fb-seacrch-bar fb-mt20">
-                        <button type="submit">🔎︎</button>
-                        <input type="text" placeholder="Nome do produto" />
-                        <button type="reset">🗙</button>
-                    </form>
+                    <SearchBar onSearch={handleSearch} />
 
                     <table className="fb-table fb-mb20 fb-mt20">
                         <thead>
-                            <th className="fb-tb576">ID</th>
-                            <th></th>
-                            <th className="fb-tb768">Preço</th>
-                            <th>Nome</th>
-                            <th></th>
-                            <th></th>
+                            <tr>
+                                <th className="fb-tb576">ID</th>
+                                <th></th>
+                                <th className="fb-tb768">Preço</th>
+                                <th>Nome</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
                         </thead>
                         <tbody>
                             {
                                 products.map(product => (
-                                    <tr>
+                                    <tr key={product.id}>
                                         <td className="fb-tb576">{product.id}</td>
-                                        <td><img className="fb-product-image" src={product.imgUrl} alt={product.name} /></td>
+                                        <td><img className="fb-product-image-listing" src={product.imgUrl} alt={product.name} /></td>
                                         <td className="fb-tb768">R$: {product.price}</td>
                                         <td>{product.name}</td>
                                         <td><img className="fb-product-listing-btn" src={editIcon} alt="" /></td>
@@ -76,8 +85,11 @@ export default function ProductListing() {
                         </tbody>
                     </table>
 
-
-                    <div className="fb-btn-next-page fb-mt20">Carregar mais</div>
+                    {
+                        !isLastPage &&
+                        <ButtonNextPage onNextPage={handleNextPageClick} />
+                    }
+                    
                 </section>
             </main>
         </>

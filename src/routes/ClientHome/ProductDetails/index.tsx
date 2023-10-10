@@ -58,7 +58,6 @@ export default function ProductDetails() {
               <ButtonPrimary text="Comprar" />
             </div>
 
-
             <Link to="/">
               <ButtonInverse text="Inicio" />
             </Link>
