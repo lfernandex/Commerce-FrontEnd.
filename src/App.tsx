@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { unstable_HistoryRouter as HistoryRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { PrivateRoute } from './components/PrivateRoute/indext';
 import Admin from './routes/Admin';
 import AdminHome from './routes/Admin/AdminHome';
 import ClientHome from './routes/ClientHome';
@@ -28,7 +29,7 @@ export default function App() {
             <Route path="login" element={<Login />} />
           </Route>
 
-          <Route path="/admin/" element={<Admin />}>
+          <Route path="/admin/" element = {<PrivateRoute><Admin/></PrivateRoute>}>
             <Route index element={<AdminHome />} />
           </Route>
           <Route path="*" element={<Navigate to="/" />} />
