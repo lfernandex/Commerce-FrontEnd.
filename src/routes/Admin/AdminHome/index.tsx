@@ -19,7 +19,7 @@ export default function AdminHome() {
             <main>
                 <section id="admin-home-section" className="fb-container">
 
-                    <h2 className="fb-section-title">Bem vindo à área administrativa {user?.name}</h2>
+                    <h2 className="fb-section-title">Bem vindo à área administrativa, {user?.name}</h2>
 
                 </section>
             </main>

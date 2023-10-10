@@ -9,6 +9,8 @@ import { history } from './utils/history';
 
 import Admin from './routes/Admin';
 import AdminHome from './routes/Admin/AdminHome';
+import ProductForm from './routes/Admin/ProductForm';
+import ProductListing from './routes/Admin/ProductListing';
 import ClientHome from './routes/ClientHome';
 import Confirmation from './routes/ClientHome/Confirmation';
 import Login from './routes/ClientHome/Login';
@@ -40,7 +42,7 @@ export default function App() {
           <Routes>
 
             <Route path="/" element={<ClientHome />} >
-              <Route index element={<ProductCatalog />} />
+              <Route index element={<Navigate to="/product-catalog" />} />
               <Route path="product-catalog" element={<ProductCatalog />} />
               <Route path="product-details/:productId" element={<ProductDetails />} />
               <Route path="product-cart" element={<ProductCart />} />
@@ -49,8 +51,13 @@ export default function App() {
             </Route>
 
             <Route path="/admin/" element={<PrivateRoute roles={['ROLE_ADMIN']}><Admin /></PrivateRoute>}>
-              <Route index element={<AdminHome />} />
+              <Route index element={ <Navigate to="/admin/home" />} />
+              <Route path="home" element={<AdminHome />} />
+              <Route path="products" element={<ProductListing />} />
+              <Route path="products/:productId" element={<ProductForm />} />
             </Route>
+
+
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </HistoryRouter>
