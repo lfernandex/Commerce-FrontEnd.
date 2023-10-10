@@ -10,5 +10,5 @@ export function get(): string | null {
 }
 
 export function remove(){
-    return localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(TOKEN_KEY);
 }

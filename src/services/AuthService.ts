@@ -26,14 +26,14 @@ export function loginRequest(loginData: CredentialsDTO) {
     return requestBackend(config);
 }
 
-export function logout(){
+export function logout() {
     remove();
 }
 
-export function saveAccesToken(token: string){
+export function saveAccesToken(token: string) {
     save(token);
 }
 
-export function getAccessToken(){
-    get();
+export function getAccessToken() {
+    return get();
 }
