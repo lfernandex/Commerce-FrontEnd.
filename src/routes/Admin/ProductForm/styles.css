@@ -1,0 +1,24 @@
+.fb-product-form-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .fb-product-form-buttons {
+    width: 100%;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  
+  @media (min-width: 576px) {
+    #fb-product-form-section {
+      padding: 40px;
+    }
+  
+    .fb-product-form-buttons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }

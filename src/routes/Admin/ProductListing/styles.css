@@ -1,0 +1,13 @@
+.fb-product-image {
+    width: 100px;
+    padding: 5px;
+}
+
+.fb-product-listing-btn {
+    height: 20px;
+    width: auto;
+
+    cursor: pointer;
+
+    margin: 5px;
+}
