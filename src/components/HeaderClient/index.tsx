@@ -1,9 +1,15 @@
 
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import iconAdmin from '../../assets/settings.svg';
+import { hasAnyRoles } from '../../services/AuthService';
+import { ContextToken } from '../../utils/contextToken';
 import { CartIcon } from '../CartIcon';
 import "./styles.css";
 
 export default function HeaderClient() {
+
+  const {contextTokenPayload} = useContext(ContextToken);
 
   return (
     <>
@@ -14,6 +20,15 @@ export default function HeaderClient() {
           </Link>
 
           <div className="fb-menu-items-container">
+            {
+              contextTokenPayload &&
+              hasAnyRoles(['ROLE_ADMIN']) &&
+              <Link to="/admin">
+                <div className="fb-menu-items">
+                  <img src={iconAdmin} alt="Admin" />
+                </div>
+              </Link>
+            }
 
             <Link to="/cart">
               <div className="fb-menu-items">
