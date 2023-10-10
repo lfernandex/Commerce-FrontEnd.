@@ -359,3 +359,43 @@ a:hover {
     font-size: 16px;
   }
 }
+
+/*------------------------------------------------*/
+/* Dialog styles */
+
+.fb-dialog-background{
+  
+  background-color: rgba(0, 0,0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.fb-dialog-box{
+  background-color: var(--c-color-card-bg);
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 5px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.fb-dialog-box h2{
+  font-size: 20px;
+  color: var(--c-color-bg-tertiary);
+  margin-bottom: 20px;
+}
+
+.fb-dialog-btn-container{
+  width: 50%;
+}

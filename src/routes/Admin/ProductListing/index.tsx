@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import editIcon from "../../../assets/Pen.svg";
 import deleteIcon from "../../../assets/Trash.svg";
 import ButtonNextPage from "../../../components/ButtonNextPage";
+import DialogInfo from "../../../components/DialogInfo";
 import SearchBar from "../../../components/SearchBar";
 import { ProductDTO } from "../../../models/product";
 import { findPageRequest } from "../../../services/ProductService";
@@ -13,7 +14,13 @@ type QueryParams = {
 }
 
 
+
 export default function ProductListing() {
+
+    const [dialogInfoData, setDialogInfoData] = useState({
+        visible: false,
+        message: "Operação realizada com sucesso!"
+    })
 
     const [isLastPage, setIsLastPage] = useState(false);
 
@@ -43,6 +50,13 @@ export default function ProductListing() {
         setQueryParams({ ...queryParams, page: queryParams.page + 1 });
     }
 
+    function handleDialogClose(){
+        setDialogInfoData({...dialogInfoData, visible: false})
+    }
+
+    function handleDeleteClick(){
+        setDialogInfoData({...dialogInfoData, visible: true})
+    }
     return (
         <>
             <main>
@@ -78,7 +92,7 @@ export default function ProductListing() {
                                         <td className="fb-tb768">R$: {product.price}</td>
                                         <td>{product.name}</td>
                                         <td><img className="fb-product-listing-btn" src={editIcon} alt="" /></td>
-                                        <td><img className="fb-product-listing-btn" src={deleteIcon} alt="" /></td>
+                                        <td><img onClick={handleDeleteClick} className="fb-product-listing-btn" src={deleteIcon} alt="" /></td>
                                     </tr>
                                 ))
                             }
@@ -89,8 +103,17 @@ export default function ProductListing() {
                         !isLastPage &&
                         <ButtonNextPage onNextPage={handleNextPageClick} />
                     }
-                    
                 </section>
+
+                {
+                    dialogInfoData.visible &&
+                    <DialogInfo
+                        message={dialogInfoData.message}
+                        onDialogClose={handleDialogClose}
+                    />
+                }
+
+
             </main>
         </>
     );
