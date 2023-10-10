@@ -101,9 +101,13 @@ export default function ProductCart() {
                             Continuar comprando
                         </div>
                     </Link>
-                    <div onClick={handleClearClick} className="fb-btn fb-btn-white fb-click">
-                        Limpar Carrinho
-                    </div>
+                    {
+                        cart.items.length > 0 &&
+                        <div onClick={handleClearClick} className="fb-btn fb-btn-white fb-click">
+                            Limpar Carrinho
+                        </div>
+                    }
+
                 </div>
             </section>
         </main>
