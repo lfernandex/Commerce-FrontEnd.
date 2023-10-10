@@ -8,13 +8,10 @@ export default function AdminHome() {
 
     useEffect(() => {
         findMe()
-        .then(response => {
-            setUser(response.data)
-            console.log(response.data)
-        })
-        .catch(error => {
-            console.log("Error: " + error)
-        })
+            .then(response => {
+                setUser(response.data)
+                console.log(response.data)
+            })
     }, [])
 
     return (
