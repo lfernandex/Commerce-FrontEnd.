@@ -30,7 +30,7 @@ export default function App() {
       setContextTokenPayload(payload);
     }
 
-  }, [contextTokenPayload]);
+  }, []);
   return (
 
     <ContextToken.Provider value={{ contextTokenPayload, setContextTokenPayload }}>

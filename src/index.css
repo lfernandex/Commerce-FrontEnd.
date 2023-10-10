@@ -99,9 +99,14 @@ body {
 .fb-btn-page-container {
   width: 100%;
 
+  
   display: grid;
   grid-gap: 20px;
   margin: auto;
+}
+
+.fb-btn-page-container a{
+  text-decoration: none;
 }
 
 .fb-btn {

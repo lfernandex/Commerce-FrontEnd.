@@ -1,0 +1,7 @@
+.login-logout-user a, span{
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--c-color-bg-primary);
+}
+

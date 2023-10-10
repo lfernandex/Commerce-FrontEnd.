@@ -76,7 +76,7 @@ export default function ProductCart() {
 
                 }
                 <div className="fb-btn-page-container">
-                    <div className="fb-btn fb-btn-blue fb-click">
+                    <div className="fb-btn fb-btn-blue fb-click fb-mt20">
                         Finalizar pedido
                     </div>
                     <Link to="/product-catalog">

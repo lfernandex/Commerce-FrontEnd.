@@ -1,5 +1,6 @@
 import homeIcon from "../../assets/inicio.svg";
 import productIcon from "../../assets/product.svg";
+import LoggedUser from "../LoggedUser";
 
 export default function HeaderAdmin() {
 
@@ -22,7 +23,7 @@ export default function HeaderAdmin() {
               </div>
 
             </div>
-            <a href="#">Entrar</a>
+            <LoggedUser />
           </div>
         </nav>
       </header>
