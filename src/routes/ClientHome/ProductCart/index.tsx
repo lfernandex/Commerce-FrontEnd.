@@ -1,37 +1,50 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { OrderDTO } from "../../../models/order";
 import { clearCart, decreaseItem, getCart, increaseItem } from "../../../services/CartService";
+import { placeOrderRequest } from "../../../services/OrderService";
 import { ContextCartCount } from "../../../utils/contextCart";
 import "./styles.css";
 
 
 export default function ProductCart() {
 
+    const navigate = useNavigate();
+
     const [cart, setCart] = useState<OrderDTO>(getCart());
 
-    const {setContextCartCount} = useContext(ContextCartCount);
+    const { setContextCartCount } = useContext(ContextCartCount);
 
-    function handleClearClick(){
+
+    function handleClearClick() {
         clearCart();
         updateCart();
     }
 
-    function handleIncreaseItem(productId: number){
+    function handleIncreaseItem(productId: number) {
         increaseItem(productId);
         const newCart = getCart();
         setCart(newCart);
     }
 
-    function handleDecreaseItem(productId: number){
-        decreaseItem(productId);   
+    function handleDecreaseItem(productId: number) {
+        decreaseItem(productId);
         updateCart();
     }
 
-    function updateCart(){
+    function updateCart() {
         const newCart = getCart();
         setCart(newCart);
         setContextCartCount(newCart.items.length);
+    }
+
+    function jandlePlaceOrderClick() {
+        placeOrderRequest(cart)
+            .then(response => {
+                clearCart();
+                setContextCartCount(0);
+                navigate(`/confirmation/${response.data.id}`)
+            })
     }
 
     return (
@@ -42,11 +55,11 @@ export default function ProductCart() {
                     cart.items.length === 0
                         ? (
                             <div>
-                                <h2 className="fb-section-title mb20">Seu carrinho está vazio</h2>
+                                <h2 className="fb-section-title fb-mb20">Seu carrinho está vazio</h2>
                             </div>
                         ) :
 
-                        <div className="fb-card mb20">
+                        <div className="fb-card fb-mb20">
 
                             {
                                 cart.items.map(item => (
@@ -76,9 +89,13 @@ export default function ProductCart() {
 
                 }
                 <div className="fb-btn-page-container">
-                    <div className="fb-btn fb-btn-blue fb-click fb-mt20">
-                        Finalizar pedido
-                    </div>
+                    {
+                        cart.items.length > 0 &&
+                        <div onClick={jandlePlaceOrderClick} className="fb-btn fb-btn-blue fb-click fb-mt20">
+                            Finalizar pedido
+                        </div>
+                    }
+
                     <Link to="/product-catalog">
                         <div className="fb-btn fb-btn-white">
                             Continuar comprando
