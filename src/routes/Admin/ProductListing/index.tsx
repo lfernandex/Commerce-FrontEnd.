@@ -6,7 +6,7 @@ import DialogConfirmation from "../../../components/DialogConfirmation";
 import DialogInfo from "../../../components/DialogInfo";
 import SearchBar from "../../../components/SearchBar";
 import { ProductDTO } from "../../../models/product";
-import { findPageRequest } from "../../../services/ProductService";
+import { deleteById, findPageRequest } from "../../../services/ProductService";
 import "./styles.css";
 
 type QueryParams = {
@@ -25,6 +25,7 @@ export default function ProductListing() {
 
     const [dialogConfirmationData, setDialogConfirmationData] = useState({
         visible: false,
+        id: 0,
         message: "Tem certeza?"
     });
 
@@ -60,12 +61,25 @@ export default function ProductListing() {
         setDialogInfoData({ ...dialogInfoData, visible: false })
     }
 
-    function handleDeleteClick() {
-        setDialogConfirmationData({...dialogConfirmationData, visible: true});
+    function handleDeleteClick(productId: number) {
+        setDialogConfirmationData({ ...dialogConfirmationData, id: productId, visible: true });
     }
 
-    function handleDialogConfirmationAnswer( answer: boolean){
-        setDialogConfirmationData({...dialogConfirmationData, visible: false});
+    function handleDialogConfirmationAnswer(answer: boolean, productId: number) {
+        if (answer) {
+            deleteById(productId)
+                .then(() => {
+                    setProducts([]);
+                    setQueryParams({ ...queryParams, page: 0 });
+                })
+                .catch(error =>{
+                    setDialogInfoData({
+                        visible: true,
+                        message: error.response.data.error
+                    })
+                })
+        }
+        setDialogConfirmationData({ ...dialogConfirmationData, visible: false });
     }
 
     return (
@@ -103,7 +117,7 @@ export default function ProductListing() {
                                         <td className="fb-tb768">R$: {product.price}</td>
                                         <td>{product.name}</td>
                                         <td><img className="fb-product-listing-btn" src={editIcon} alt="" /></td>
-                                        <td><img onClick={handleDeleteClick} className="fb-product-listing-btn" src={deleteIcon} alt="" /></td>
+                                        <td><img onClick={() => handleDeleteClick(product.id)} className="fb-product-listing-btn" src={deleteIcon} alt="" /></td>
                                     </tr>
                                 ))
                             }
@@ -127,6 +141,7 @@ export default function ProductListing() {
                 {
                     dialogConfirmationData.visible &&
                     <DialogConfirmation
+                        id={dialogConfirmationData.id}
                         message={dialogConfirmationData.message}
                         onDialogAnswer={handleDialogConfirmationAnswer}
                     />
