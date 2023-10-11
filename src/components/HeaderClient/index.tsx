@@ -9,7 +9,7 @@ import LoggedUser from '../LoggedUser';
 
 export default function HeaderClient() {
 
-  const {contextTokenPayload} = useContext(ContextToken);
+  const { contextTokenPayload } = useContext(ContextToken);
 
   return (
     <>
@@ -30,11 +30,11 @@ export default function HeaderClient() {
               </Link>
             }
 
-            <Link to="/cart">
-              <div className="fb-menu-items">
-                <CartIcon />
-              </div>
-            </Link>
+
+            <div className="fb-menu-items">
+              <CartIcon />
+            </div>
+
             <LoggedUser />
 
           </div>

@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CredentialsDTO } from "../../../models/auth";
+import FormIput from "../../../components/FormIput";
 import { getAccessTokenPayload, loginRequest, saveAccesToken } from "../../../services/AuthService";
 import { ContextToken } from "../../../utils/contextToken";
 import "./styles.css";
@@ -12,14 +12,30 @@ export default function Login() {
 
     const navigate = useNavigate();
 
-    const [formData, setFormData] = useState<CredentialsDTO>({
-        username: "",
-        password: ""
+    const [formData, setFormData] = useState<any>({
+        username: {
+            value: "",
+            id: "username",
+            name: "username",
+            type: "text",
+            placeholder: "Email",
+            validation: function (value: string) {
+                return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value.toLowerCase());
+            },
+            message: "Favor informar um email válido",
+        },
+        password: {
+            value: "",
+            id: "password",
+            name: "password",
+            type: "password",
+            placeholder: "Senha",
+        }
     })
 
     function handleSubmit(event: any) {
         event.preventDefault();
-        loginRequest(formData)
+        loginRequest({ username: formData.username.value, password: formData.password.value })
             .then(response => {
                 saveAccesToken(response.data.access_token);
                 setContextTokenPayload(getAccessTokenPayload());
@@ -33,8 +49,10 @@ export default function Login() {
     function handleInputChange(event: any) {
         const value = event.target.value;
         const name = event.target.name;
-        setFormData({ ...formData, [name]: value })
+        setFormData({ ...formData, [name]: { ...formData[name], value: value } })
     }
+
+
     return (
         <>
             <main>
@@ -44,23 +62,17 @@ export default function Login() {
                             <h2>Login</h2>
                             <div className="fb-form-controls-container">
                                 <div>
-                                    <input
-                                        name="username"
-                                        value={formData.username}
+                                    <FormIput
+                                        {...formData.username}
                                         className="fb-form-control"
-                                        type="text"
-                                        placeholder="Email"
                                         onChange={handleInputChange}
                                     />
                                     <div className="fb-form-error"></div>
                                 </div>
                                 <div>
-                                    <input
-                                        name="password"
-                                        value={formData.password}
+                                    <FormIput
+                                        {...formData.password}
                                         className="fb-form-control"
-                                        type="password"
-                                        placeholder="Senha"
                                         onChange={handleInputChange}
                                     />
                                 </div>

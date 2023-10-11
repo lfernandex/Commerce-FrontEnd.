@@ -10,7 +10,6 @@ export default function AdminHome() {
         findMe()
             .then(response => {
                 setUser(response.data)
-                console.log(response.data)
             })
     }, [])
 
