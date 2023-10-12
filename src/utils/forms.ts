@@ -28,5 +28,5 @@ export function validate(inputs: any, name: string) {
 
     const isInValid = !inputs[name].validation(inputs[name].value);
 
-    return { ...inputs, [name]: { ...inputs[name], inValide: isInValid.toString() } }
+    return { ...inputs, [name]: { ...inputs[name], invalid: isInValid.toString() } }
 }

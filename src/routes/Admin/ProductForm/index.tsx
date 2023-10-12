@@ -20,7 +20,7 @@ export default function ProductForm() {
             placeholder: "Nome",
         },
         price: {
-            value: 200,
+            value: "",
             id: "price",
             name: "price",
             type: "number",
@@ -40,8 +40,6 @@ export default function ProductForm() {
     })
 
     useEffect(() => {
-        const obj = validate(formData, "price");
-        console.log(obj);
 
         if (isEditing) {
             findById(Number(params.productId))
@@ -53,7 +51,9 @@ export default function ProductForm() {
     }, [])
 
     function handleInputChange(event: any) {
-        setFormData(update(formData, event.target.name, event.target.value));
+        const dataUpdated = update(formData, event.target.name, event.target.value);
+        const dataValideted = validate(dataUpdated, event.target.name)
+        setFormData(dataValideted);
     }
 
     return (
@@ -70,6 +70,9 @@ export default function ProductForm() {
                                         className="fb-form-control"
                                         onChange={handleInputChange}
                                     />
+                                    <div className="fb-form-error">
+                                        {formData.name.message}
+                                    </div>
                                 </div>
                                 <div>
                                     <FormIput
@@ -77,6 +80,9 @@ export default function ProductForm() {
                                         className="fb-form-control"
                                         onChange={handleInputChange}
                                     />
+                                    <div className="fb-form-error">
+                                        {formData.price.message}
+                                    </div>
                                 </div>
                                 <div>
                                     <FormIput

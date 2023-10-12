@@ -1,4 +1,3 @@
-
 :root {
   --c-color-bg-primary: #d7d2d2;
   --c-color-bg-secondary: #3483fa;
@@ -14,7 +13,7 @@
   --c-color-font-primary: #0caf0c;
   --c-color-font-secondary: #636363;
   --c-color-font-tertiary: #fff;
-  
+
   --c-color-font-quantity: #3483fa;
 
   --c-color-font-placeholder: #c7c7c7;
@@ -80,7 +79,7 @@ a:hover {
 .fb-menu-items-container img {
   width: 20px;
   height: 20px;
-  
+
 }
 
 .fb-menu-items {
@@ -129,13 +128,13 @@ a:hover {
 .fb-btn-page-container {
   width: 100%;
 
-  
+
   display: grid;
   grid-gap: 20px;
   margin: auto;
 }
 
-.fb-btn-page-container a{
+.fb-btn-page-container a {
   text-decoration: none;
 }
 
@@ -159,7 +158,7 @@ a:hover {
   border: none;
 }
 
-.fb-click{
+.fb-click {
   cursor: pointer;
 }
 
@@ -179,7 +178,7 @@ a:hover {
   margin: 0 auto;
 }
 
-.product-container a{
+.product-container a {
   text-decoration: none;
 }
 
@@ -197,7 +196,7 @@ a:hover {
   color: var(--c-color-font-secondary);
 }
 
-@media (min-width:576px){
+@media (min-width:576px) {
   .fb-section-title {
     font-size: 24px;
   }
@@ -246,13 +245,19 @@ a:hover {
   color: var(--c-color-font-placeholder);
 }
 
-.fb-input-error {
+.fb-form-control[data-invalid="true"] ~ div{
+  display: unset;
+}
+
+.fb-form-control[data-invalid="true"] {
   border: 1px solid var(--c-color-error);
 }
+
 .fb-form-error {
   color: var(--c-color-error);
   font-size: 12px;
   padding-left: 4px;
+  display: none;
 }
 
 .fb-select:invalid {
@@ -322,6 +327,7 @@ a:hover {
 .fb-table td:last-child {
   padding-right: 10px;
 }
+
 .fb-tb576 {
   display: none;
 }
@@ -363,9 +369,9 @@ a:hover {
 /*------------------------------------------------*/
 /* Dialog styles */
 
-.fb-dialog-background{
-  
-  background-color: rgba(0, 0,0, 0.5);
+.fb-dialog-background {
+
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 0;
   left: 0;
@@ -373,7 +379,7 @@ a:hover {
   bottom: 0;
 }
 
-.fb-dialog-box{
+.fb-dialog-box {
   background-color: var(--c-color-card-bg);
   padding: 20px;
 
@@ -390,22 +396,22 @@ a:hover {
   transform: translate(-50%, -50%);
 }
 
-.fb-dialog-box h2{
+.fb-dialog-box h2 {
   font-size: 20px;
   color: var(--c-color-bg-tertiary);
   margin-bottom: 20px;
 }
 
-.fb-dialog-btn-container{
+.fb-dialog-btn-container {
   width: 100%;
-  
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
 
 }
 
-.fb-dialog-btn{
+.fb-dialog-btn {
   width: 50%;
 
 }
