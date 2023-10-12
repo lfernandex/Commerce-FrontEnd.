@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import editIcon from "../../../assets/Pen.svg";
 import deleteIcon from "../../../assets/Trash.svg";
+import ButtonInverse from "../../../components/ButtonInverse";
 import ButtonNextPage from "../../../components/ButtonNextPage";
 import DialogConfirmation from "../../../components/DialogConfirmation";
 import DialogInfo from "../../../components/DialogInfo";
@@ -17,6 +19,8 @@ type QueryParams = {
 
 
 export default function ProductListing() {
+
+    const navigate = useNavigate();
 
     const [dialogInfoData, setDialogInfoData] = useState({
         visible: false,
@@ -48,6 +52,10 @@ export default function ProductListing() {
 
     }, [queryParams]);
 
+    function handleNewproductClick(){
+        navigate("/admin/products/create")
+    }
+
     function handleSearch(searchText: string) {
         setProducts([]);
         setQueryParams({ ...queryParams, page: 0, name: searchText });
@@ -72,7 +80,7 @@ export default function ProductListing() {
                     setProducts([]);
                     setQueryParams({ ...queryParams, page: 0 });
                 })
-                .catch(error =>{
+                .catch(error => {
                     setDialogInfoData({
                         visible: true,
                         message: error.response.data.error
@@ -90,8 +98,9 @@ export default function ProductListing() {
                     <h2 className="fb-section-title">Cadastro de produtos</h2>
 
                     <div className="fb-btn-page-container fb-mt20 fb-mb20">
-                        <div className="fb-btn-next-page">
-                            Novo
+
+                        <div onClick={handleNewproductClick}>
+                            <ButtonInverse text="Novo" />
                         </div>
                     </div>
 

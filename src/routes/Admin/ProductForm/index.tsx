@@ -1,6 +1,53 @@
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import FormIput from "../../../components/FormIput";
+import { findById } from "../../../services/ProductService";
+import { update, updateAll } from "../../../utils/forms";
 import "./styles.css";
 
 export default function ProductForm() {
+
+    const params = useParams();
+
+    const isEditing = params.productId !== 'create';
+
+    const [formData, setFormData] = useState<any>({
+        name: {
+            value: "",
+            id: "name",
+            name: "name",
+            type: "text",
+            placeholder: "Nome",
+        },
+        price: {
+            value: "",
+            id: "price",
+            name: "price",
+            type: "number",
+            placeholder: "Preço",
+        },
+        imgUrl: {
+            value: "",
+            id: "imgUrl",
+            name: "imgUrl",
+            type: "text",
+            placeholder: "Imagem",
+        },
+    })
+
+    useEffect (() => {
+        if(isEditing){
+            findById(Number(params.productId))
+            .then(response =>{
+                const newFormData = updateAll(formData, response.data);
+                setFormData(newFormData);
+            })
+        }
+    }, [])
+
+    function handleInputChange(event: any) {
+        setFormData(update(formData, event.target.name, event.target.value));
+    }
 
     return (
         <>
@@ -11,44 +58,35 @@ export default function ProductForm() {
                             <h2>Dados do Produto</h2>
                             <div className="fb-form-controls-container">
                                 <div>
-                                    <input
+                                    <FormIput
+                                        {...formData.name}
                                         className="fb-form-control"
-                                        type="text"
-                                        placeholder="Nome"
+                                        onChange={handleInputChange}
                                     />
                                 </div>
                                 <div>
-                                    <input
+                                    <FormIput
+                                        {...formData.price}
                                         className="fb-form-control"
-                                        type="text"
-                                        placeholder="Preço"
+                                        onChange={handleInputChange}
                                     />
                                 </div>
                                 <div>
-                                    <input
+                                    <FormIput
+                                        {...formData.imgUrl}
                                         className="fb-form-control"
-                                        type="text"
-                                        placeholder="Imagem"
+                                        onChange={handleInputChange}
                                     />
-                                </div>
-
-                                <div>
-                                    <select className="fb-form-control fb-select" required>
-                                        <option value="" disabled selected>Categorias</option>
-                                        <option value="Valor1">Valor 1</option>
-                                        <option value="Valor2">Valor 2</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <textarea className="fb-form-control fb-textarea" placeholder="Descrição"></textarea>
                                 </div>
                             </div>
 
-
                             <div className="fb-product-form-buttons">
-                                <button type="reset" className="fb-btn fb-btn-white">Cancelar</button>
-                                <button type="submit" className="fb-btn fb-btn-blue">Salvar</button>
+                                <Link to="/admin/products">
+                                    <button type="reset" className="fb-btn fb-btn-white">Cancelar</button>
+                                </Link>
+                                <Link to="">
+                                    <button type="submit" className="fb-btn fb-btn-blue">Salvar</button>
+                                </Link>
                             </div>
                         </form>
                     </div>
