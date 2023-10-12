@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import FormIput from "../../../components/FormIput";
 import { getAccessTokenPayload, loginRequest, saveAccesToken } from "../../../services/AuthService";
 import { ContextToken } from "../../../utils/contextToken";
-import { update } from "../../../utils/forms";
+import { toValues, update } from "../../../utils/forms";
 import "./styles.css";
 
 export default function Login() {
@@ -36,7 +36,7 @@ export default function Login() {
 
     function handleSubmit(event: any) {
         event.preventDefault();
-        loginRequest({ username: formData.username.value, password: formData.password.value })
+        loginRequest(toValues(formData))
             .then(response => {
                 saveAccesToken(response.data.access_token);
                 setContextTokenPayload(getAccessTokenPayload());
