@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import FormIput from "../../../components/FormIput";
 import { findById } from "../../../services/ProductService";
-import { update, updateAll } from "../../../utils/forms";
+import { update, updateAll, validate } from "../../../utils/forms";
 import "./styles.css";
 
 export default function ProductForm() {
@@ -20,11 +20,15 @@ export default function ProductForm() {
             placeholder: "Nome",
         },
         price: {
-            value: "",
+            value: 200,
             id: "price",
             name: "price",
             type: "number",
             placeholder: "Preço",
+            validation: function (value: any) {
+                return Number(value) > 0;
+            },
+            message: "Por favor, informe um valor positivo."
         },
         imgUrl: {
             value: "",
@@ -35,13 +39,16 @@ export default function ProductForm() {
         },
     })
 
-    useEffect (() => {
-        if(isEditing){
+    useEffect(() => {
+        const obj = validate(formData, "price");
+        console.log(obj);
+
+        if (isEditing) {
             findById(Number(params.productId))
-            .then(response =>{
-                const newFormData = updateAll(formData, response.data);
-                setFormData(newFormData);
-            })
+                .then(response => {
+                    const newFormData = updateAll(formData, response.data);
+                    setFormData(newFormData);
+                })
         }
     }, [])
 
