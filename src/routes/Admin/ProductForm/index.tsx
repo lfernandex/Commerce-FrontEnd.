@@ -9,7 +9,7 @@ import FormTextArea from "../../../components/FormTextArea";
 import { CategoryDTO } from "../../../models/category";
 import { findAllRequest } from "../../../services/CategoryService";
 import { findById } from "../../../services/ProductService";
-import { dirtyAndValidateAll, dirtyValidate, hasAnyInvalid, update, updateAll, updateAndValidate } from "../../../utils/forms";
+import { dirtyAndValidateAll, dirtyValidate, hasAnyInvalid, toValues, update, updateAll, updateAndValidate } from "../../../utils/forms";
 import { selectStyles } from "../../../utils/select";
 import "./styles.css";
 
@@ -114,6 +114,8 @@ export default function ProductForm() {
             setFormData(formDataValidated);
             return;
         }
+
+        const requestBody = toValues(formData);
     }
 
     return (
@@ -194,9 +196,7 @@ export default function ProductForm() {
                                 <Link to="/admin/products">
                                     <button type="reset" className="fb-btn fb-btn-white">Cancelar</button>
                                 </Link>
-                                <Link to="">
-                                    <button type="submit" className="fb-btn fb-btn-blue">Salvar</button>
-                                </Link>
+                                <button type="submit" className="fb-btn fb-btn-blue">Salvar</button>
                             </div>
                         </form>
                     </div>
