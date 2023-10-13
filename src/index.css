@@ -260,22 +260,15 @@ a:hover {
   display: none;
 }
 
-.fb-select:invalid {
-  color: var(--c-color-font-placeholder);
-}
-
-.fb-select option[disabled] {
-  display: none;
-}
-
-.fb-select option {
-  color: var(--c-color-font-secondary);
-}
-
 .fb-textarea {
   height: 128px;
   padding-top: 10px;
   resize: none;
+}
+
+.fb-form-select-container{
+  padding: unset;
+  height: unset;
 }
 
 @media (min-width: 576px) {
