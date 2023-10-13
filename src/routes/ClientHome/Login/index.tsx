@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import FormIput from "../../../components/FormIput";
 import { getAccessTokenPayload, loginRequest, saveAccesToken } from "../../../services/AuthService";
 import { ContextToken } from "../../../utils/contextToken";
-import { dirtyValidate, toValues, updateAndValidate } from "../../../utils/forms";
+import { dirtyAndValidateAll, dirtyValidate, hasAnyInvalid, toValues, updateAndValidate } from "../../../utils/forms";
 import "./styles.css";
 
 export default function Login() {
@@ -12,6 +12,8 @@ export default function Login() {
 
 
     const navigate = useNavigate();
+
+    const [submitResponseFail, setSubmitResponseFail] = useState(false);
 
     const [formData, setFormData] = useState<any>({
         username: {
@@ -31,27 +33,29 @@ export default function Login() {
             name: "password",
             type: "password",
             placeholder: "Senha",
-            validation: function (value: string) {
-                return /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{5,20}$/.test(value);
-            },
-            message: <>
-                A senha deve ter de 8 a 20 caracteres.<br />
-                Deve conter letra, um número e um caractere especial.<br />
-                Não deve começar com um caractere especial.
-            </>
         }
     })
 
     function handleSubmit(event: any) {
         event.preventDefault();
+
+        setSubmitResponseFail(false);
+
+        const formDataValidated = dirtyAndValidateAll(formData);
+
+        if (hasAnyInvalid(formDataValidated)) {
+            setFormData(formDataValidated);
+            return;
+        }
+
         loginRequest(toValues(formData))
             .then(response => {
                 saveAccesToken(response.data.access_token);
                 setContextTokenPayload(getAccessTokenPayload());
                 navigate("/product-cart")
             })
-            .catch(error => {
-                console.log("Erro no login: ", error)
+            .catch(() => {
+                setSubmitResponseFail(true);
             })
     }
 
@@ -90,11 +94,15 @@ export default function Login() {
                                         onTurnDirty={onTurnDirty}
                                         onChange={handleInputChange}
                                     />
-                                    <div className="fb-form-error">
-                                        {formData.password.message}
-                                    </div>
                                 </div>
                             </div>
+
+                            {
+                                submitResponseFail &&
+                                <div className="fb-form-global-error">
+                                    Usuário ou senha invalida
+                                </div>
+                            }
 
                             <div className="fb-login-form-buttons fb-mt20">
                                 <button type="submit" className="fb-btn fb-btn-blue">Entrar</button>
