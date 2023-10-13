@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import FormIput from "../../../components/FormIput";
 import { findById } from "../../../services/ProductService";
-import { update, updateAll, validate } from "../../../utils/forms";
+import { toDirty, update, updateAll, validate } from "../../../utils/forms";
 import "./styles.css";
 
 export default function ProductForm() {
@@ -56,6 +56,11 @@ export default function ProductForm() {
         setFormData(dataValideted);
     }
 
+    function onTurnDirty (name: string){
+        const newFormData = toDirty(formData, name);
+        setFormData(newFormData);
+    }
+
     return (
         <>
             <main>
@@ -68,6 +73,7 @@ export default function ProductForm() {
                                     <FormIput
                                         {...formData.name}
                                         className="fb-form-control"
+                                        onTurnDirty={onTurnDirty}
                                         onChange={handleInputChange}
                                     />
                                     <div className="fb-form-error">
@@ -78,6 +84,7 @@ export default function ProductForm() {
                                     <FormIput
                                         {...formData.price}
                                         className="fb-form-control"
+                                        onTurnDirty={onTurnDirty}
                                         onChange={handleInputChange}
                                     />
                                     <div className="fb-form-error">
@@ -88,6 +95,7 @@ export default function ProductForm() {
                                     <FormIput
                                         {...formData.imgUrl}
                                         className="fb-form-control"
+                                        onTurnDirty={onTurnDirty}
                                         onChange={handleInputChange}
                                     />
                                 </div>

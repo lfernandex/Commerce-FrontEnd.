@@ -245,11 +245,11 @@ a:hover {
   color: var(--c-color-font-placeholder);
 }
 
-.fb-form-control[data-invalid="true"] ~ div{
+.fb-form-control[data-invalid="true"][data-dirty="true"] ~ div{
   display: unset;
 }
 
-.fb-form-control[data-invalid="true"] {
+.fb-form-control[data-invalid="true"][data-dirty="true"] {
   border: 1px solid var(--c-color-error);
 }
 
