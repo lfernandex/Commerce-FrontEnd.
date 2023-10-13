@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import FormIput from "../../../components/FormIput";
 import { getAccessTokenPayload, loginRequest, saveAccesToken } from "../../../services/AuthService";
 import { ContextToken } from "../../../utils/contextToken";
-import { toValues, update } from "../../../utils/forms";
+import { toDirty, toValues, updateAndValidate } from "../../../utils/forms";
 import "./styles.css";
 
 export default function Login() {
@@ -48,7 +48,11 @@ export default function Login() {
     }
 
     function handleInputChange(event: any) {
-        setFormData(update(formData, event.target.name, event.target.value));
+        setFormData(updateAndValidate(formData, event.target.name, event.target.value));
+    }
+
+    function onTurnDirty (name: string){
+        setFormData(toDirty(formData, name));
     }
 
 
@@ -64,6 +68,7 @@ export default function Login() {
                                     <FormIput
                                         {...formData.username}
                                         className="fb-form-control"
+                                        onTurnDirty={onTurnDirty}
                                         onChange={handleInputChange}
                                     />
                                     <div className="fb-form-error"></div>
@@ -72,6 +77,7 @@ export default function Login() {
                                     <FormIput
                                         {...formData.password}
                                         className="fb-form-control"
+                                        onTurnDirty={onTurnDirty}
                                         onChange={handleInputChange}
                                     />
                                 </div>

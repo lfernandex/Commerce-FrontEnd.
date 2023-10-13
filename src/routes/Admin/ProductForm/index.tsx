@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import FormIput from "../../../components/FormIput";
 import { findById } from "../../../services/ProductService";
-import { toDirty, update, updateAll, validate } from "../../../utils/forms";
+import { dirtyValidate, updateAll, updateAndValidate } from "../../../utils/forms";
 import "./styles.css";
 
 export default function ProductForm() {
@@ -48,17 +48,14 @@ export default function ProductForm() {
                     setFormData(newFormData);
                 })
         }
-    }, [])
+    }, []);
 
     function handleInputChange(event: any) {
-        const dataUpdated = update(formData, event.target.name, event.target.value);
-        const dataValideted = validate(dataUpdated, event.target.name)
-        setFormData(dataValideted);
+        setFormData(updateAndValidate(formData, event.target.name, event.target.value));
     }
 
     function onTurnDirty (name: string){
-        const newFormData = toDirty(formData, name);
-        setFormData(newFormData);
+        setFormData(dirtyValidate(formData, name));
     }
 
     return (
