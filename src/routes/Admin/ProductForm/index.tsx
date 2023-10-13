@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import makeAnimated from 'react-select/animated';
 import FormIput from "../../../components/FormIput";
@@ -8,7 +8,7 @@ import FormTextArea from "../../../components/FormTextArea";
 
 import { CategoryDTO } from "../../../models/category";
 import { findAllRequest } from "../../../services/CategoryService";
-import { findById } from "../../../services/ProductService";
+import { findById, insertRequest, updateRequest } from "../../../services/ProductService";
 import { dirtyAndValidateAll, dirtyValidate, hasAnyInvalid, toValues, update, updateAll, updateAndValidate } from "../../../utils/forms";
 import { selectStyles } from "../../../utils/select";
 import "./styles.css";
@@ -18,6 +18,8 @@ import "./styles.css";
 export default function ProductForm() {
 
     const animatedComponents = makeAnimated();
+
+    const navigate = useNavigate();
 
     const params = useParams();
 
@@ -116,6 +118,19 @@ export default function ProductForm() {
         }
 
         const requestBody = toValues(formData);
+
+        if (isEditing) {
+            requestBody.id = params.productId;
+        }
+
+        const request = isEditing
+            ? updateRequest(requestBody)
+            : insertRequest(requestBody);
+
+        request
+            .then(() => {
+                navigate("/admin/products")
+            })
     }
 
     return (
