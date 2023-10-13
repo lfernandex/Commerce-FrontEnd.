@@ -16,8 +16,6 @@ type QueryParams = {
     name: string;
 }
 
-
-
 export default function ProductListing() {
 
     const navigate = useNavigate();
@@ -52,7 +50,7 @@ export default function ProductListing() {
 
     }, [queryParams]);
 
-    function handleNewproductClick(){
+    function handleNewproductClick() {
         navigate("/admin/products/create")
     }
 
@@ -67,6 +65,10 @@ export default function ProductListing() {
 
     function handleDialogClose() {
         setDialogInfoData({ ...dialogInfoData, visible: false })
+    }
+
+    function handleUpdateClick(productId: number){
+        navigate(`/admin/products/${productId}`)
     }
 
     function handleDeleteClick(productId: number) {
@@ -125,8 +127,8 @@ export default function ProductListing() {
                                         <td><img className="fb-product-image-listing" src={product.imgUrl} alt={product.name} /></td>
                                         <td className="fb-tb768">R$: {product.price}</td>
                                         <td>{product.name}</td>
-                                        <td><img className="fb-product-listing-btn" src={editIcon} alt="" /></td>
-                                        <td><img onClick={() => handleDeleteClick(product.id)} className="fb-product-listing-btn" src={deleteIcon} alt="" /></td>
+                                        <td><img onClick={() => handleUpdateClick(product.id)} className="fb-product-listing-btn" src={editIcon} alt="Editar" /></td>
+                                        <td><img onClick={() => handleDeleteClick(product.id)} className="fb-product-listing-btn" src={deleteIcon} alt="Excluir" /></td>
                                     </tr>
                                 ))
                             }

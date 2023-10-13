@@ -9,7 +9,7 @@ import FormTextArea from "../../../components/FormTextArea";
 import { CategoryDTO } from "../../../models/category";
 import { findAllRequest } from "../../../services/CategoryService";
 import { findById } from "../../../services/ProductService";
-import { dirtyValidate, update, updateAll, updateAndValidate } from "../../../utils/forms";
+import { dirtyAndValidateAll, dirtyValidate, hasAnyInvalid, update, updateAll, updateAndValidate } from "../../../utils/forms";
 import { selectStyles } from "../../../utils/select";
 import "./styles.css";
 
@@ -105,12 +105,23 @@ export default function ProductForm() {
         setFormData(dirtyValidate(formData, name));
     }
 
+    function handleSubmit(event: any) {
+        event.preventDefault();
+
+        const formDataValidated = dirtyAndValidateAll(formData);
+
+        if (hasAnyInvalid(formDataValidated)) {
+            setFormData(formDataValidated);
+            return;
+        }
+    }
+
     return (
         <>
             <main>
                 <section id="product-form-section" className="fb-container">
                     <div className="fb-product-form-container">
-                        <form className="fb-card fb-form">
+                        <form className="fb-card fb-form" onSubmit={handleSubmit}>
                             <h2>Dados do Produto</h2>
                             <div className="fb-form-controls-container">
                                 <div>
@@ -148,7 +159,7 @@ export default function ProductForm() {
                                     <FormSelect
                                         {...formData.categories}
                                         className="fb-form-control fb-form-select-container"
-                                        styles ={selectStyles}
+                                        styles={selectStyles}
                                         options={categories}
                                         onChange={(obj: any) => {
                                             const newFormData = update(formData, "categories", obj);
