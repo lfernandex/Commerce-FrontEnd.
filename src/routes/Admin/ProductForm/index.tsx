@@ -9,7 +9,7 @@ import FormTextArea from "../../../components/FormTextArea";
 import { CategoryDTO } from "../../../models/category";
 import { findAllRequest } from "../../../services/CategoryService";
 import { findById, insertRequest, updateRequest } from "../../../services/ProductService";
-import { dirtyAndValidateAll, dirtyValidate, hasAnyInvalid, toValues, update, updateAll, updateAndValidate } from "../../../utils/forms";
+import { dirtyAndValidateAll, dirtyValidate, hasAnyInvalid, setBackendErrors, toValues, update, updateAll, updateAndValidate } from "../../../utils/forms";
 import { selectStyles } from "../../../utils/select";
 import "./styles.css";
 
@@ -131,6 +131,10 @@ export default function ProductForm() {
             .then(() => {
                 navigate("/admin/products")
             })
+            .catch(error => {
+                const newInput = setBackendErrors(formData, error.response.data.errors);
+                setFormData(newInput);
+            });
     }
 
     return (
