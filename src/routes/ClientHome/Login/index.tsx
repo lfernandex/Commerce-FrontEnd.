@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import FormIput from "../../../components/FormIput";
 import { getAccessTokenPayload, loginRequest, saveAccesToken } from "../../../services/AuthService";
 import { ContextToken } from "../../../utils/contextToken";
-import { toDirty, toValues, updateAndValidate } from "../../../utils/forms";
+import { dirtyValidate, toValues, updateAndValidate } from "../../../utils/forms";
 import "./styles.css";
 
 export default function Login() {
@@ -31,6 +31,14 @@ export default function Login() {
             name: "password",
             type: "password",
             placeholder: "Senha",
+            validation: function (value: string) {
+                return /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d][A-Za-z\d!@#$%^&*()_+]{5,20}$/.test(value);
+            },
+            message: <>
+                A senha deve ter de 8 a 20 caracteres.<br />
+                Deve conter letra, um número e um caractere especial.<br />
+                Não deve começar com um caractere especial.
+            </>
         }
     })
 
@@ -51,8 +59,8 @@ export default function Login() {
         setFormData(updateAndValidate(formData, event.target.name, event.target.value));
     }
 
-    function onTurnDirty (name: string){
-        setFormData(toDirty(formData, name));
+    function onTurnDirty(name: string) {
+        setFormData(dirtyValidate(formData, name));
     }
 
 
@@ -71,7 +79,9 @@ export default function Login() {
                                         onTurnDirty={onTurnDirty}
                                         onChange={handleInputChange}
                                     />
-                                    <div className="fb-form-error"></div>
+                                    <div className="fb-form-error">
+                                        {formData.username.message}
+                                    </div>
                                 </div>
                                 <div>
                                     <FormIput
@@ -80,6 +90,9 @@ export default function Login() {
                                         onTurnDirty={onTurnDirty}
                                         onChange={handleInputChange}
                                     />
+                                    <div className="fb-form-error">
+                                        {formData.password.message}
+                                    </div>
                                 </div>
                             </div>
 
